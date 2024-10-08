@@ -32,8 +32,10 @@ public class VideoController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         if(url.contains("videos")) {
-            List<Video> videoList = videoService.FindAll();
             categoryid = req.getParameter("id");
+            // Lấy danh sách video theo categoryID
+            List<Video> videoList;
+            videoList = videoService.FindListById(categoryid);
             req.setAttribute("videoList", videoList);
             req.getRequestDispatcher("/views/admin/video_list.jsp").forward(req, resp);
         }

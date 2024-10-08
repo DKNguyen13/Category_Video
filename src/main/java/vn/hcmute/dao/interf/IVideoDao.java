@@ -15,5 +15,6 @@ public interface IVideoDao {
     Video FindById(String id);
 
     List<Video> FindAll();
+    List<Video> FindListById(String id);
 
 }

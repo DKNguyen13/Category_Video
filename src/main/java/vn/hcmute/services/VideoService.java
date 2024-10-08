@@ -12,17 +12,35 @@ public class VideoService implements IVideoService {
 
     @Override
     public void Insert(Video video) {
-        videoDao.Insert(video);
+        Video vid = videoDao.FindById(video.getVideoId());
+        if(vid==null){
+            videoDao.Insert(video);
+        }
+        else{
+            System.out.println("Đã tồn tại tài khoản");
+        }
     }
 
     @Override
     public void Delete(Video video) throws Exception {
-        videoDao.Delete(video);
+        Video vid = videoDao.FindById(video.getVideoId());
+        if(vid!=null){
+            videoDao.Delete(video);
+        }
+        else{
+            System.out.println("Không tồn tại tài khoản");
+        }
     }
 
     @Override
     public void Update(Video video) {
-        videoDao.Update(video);
+        Video vid = videoDao.FindById(video.getVideoId());
+        if(vid!=null){
+            videoDao.Update(video);
+        }
+        else{
+            System.out.println("Không tồn tại tài khoản");
+        }
     }
 
     @Override
@@ -33,5 +51,10 @@ public class VideoService implements IVideoService {
     @Override
     public List<Video> FindAll() {
         return videoDao.FindAll();
+    }
+
+    @Override
+    public List<Video> FindListById(String id) {
+        return videoDao.FindListById(id);
     }
 }

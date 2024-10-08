@@ -5,6 +5,7 @@ import jakarta.persistence.EntityTransaction;
 
 public class test {
     public static void main(String[] args) {
+        /*
         // Tạo EntityManager từ cấu hình JPA
         EntityManager enma = JPAConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();
@@ -34,7 +35,8 @@ public class test {
             if (enma.isOpen()) {
                 enma.close();
             }
-        }
+        }*/
     }
+
 
 }

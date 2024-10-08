@@ -30,7 +30,9 @@
             <td style="text-align: center">${video.views}</td>
             <td style="text-align: center">${video.active == 1 ? 'Active' : 'Inactive'}</td>
             <td>
-                <a href="<c:url value='/admin/video/edit?id=${video.videoId}'/>">Edit</a>
+                <a href="<c:url value='/admin/video/edit?id=${video.videoId}'/>"style="text-align: center">Edit</a>
+                |
+                <a href="<c:url value='/admin/video/edit?id=${video.videoId}'/>" style="text-align: center">Delete</a>
             </td>
         </tr>
     </c:forEach>
