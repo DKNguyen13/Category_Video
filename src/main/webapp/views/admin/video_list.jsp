@@ -13,8 +13,8 @@
         <th>Description</th>
         <th>Poster</th>
         <th>Views</th>
-        <th>Status</th>
         <th>Active</th>
+        <th>Chosse</th>
     </tr>
     <c:forEach var="video" items="${videoList}">
         <tr>

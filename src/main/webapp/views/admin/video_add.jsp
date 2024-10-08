@@ -7,33 +7,32 @@
       <title>Add Video</title>
   </head>
   <body>
-  <h1>Edit Video</h1>
-  <form action="${pageContext.request.contextPath}/admin/video/add" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="videoId" value="${video.videoId}">
+  <h1>Add Video</h1>
+  <form action="${pageContext.request.contextPath}/admin/video/insert" method="post" enctype="multipart/form-data">
+
+    <label for="cateID">Category ID:</label> <br>
+    <input type="text" name="cateID" id="cateID" readonly value="${category.categoryId}" style="text-align: center"> <br><br>
+
+    <label for="videoid">Video ID:</label> <br>
+    <input type="text" name="vId" id="videoid"> <br> <br>
 
     <label for="title">Title: </label><br>
-    <input type="text" id="title" name="title" value="${video.title}"><br>
+    <input type="text" id="title" name="title"><br><br>
 
     <label for="description">Description: </label><br>
-    <textarea id="description" name="description">${video.description}</textarea><br>
+    <input type="text" id="description" name="description"><br><br>
 
     <label for="poster">Poster: </label><br>
-    <img height="150" width="200" src="${video.poster}"/> <!-- Hiển thị ảnh hiện tại -->
-    <input type="file" id="poster" name="poster"><br>
+    <img height="150" width="200" src=""/> <br>
+    <input type="file" id="poster" name="poster"><br> <br>
 
     <label for="views">Views: </label><br>
-    <input type="number" id="views" name="views" value="${video.views}"><br>
+    <input type="number" id="views" name="views"><br><br>
 
     <label for="status">Status: </label><br>
-    <input type="number" id="status" name="status" value="${video.active}"><br><br>
+    <input type="text" id="status" name="status" value="${category.status}" readonly style="text-align: center"><br><br>
 
-    <input type="submit" value="Update">
+    <input type="submit" value="Add">
   </form>
-  </body>
-</html>
-</title>
-  </head>
-  <body>
-  
   </body>
 </html>
