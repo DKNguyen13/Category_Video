@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Home</title>
 </head>
 <body>
-  <h1>Hello Admin</h1>
+  <h1>Hello Admin! Change http://localhost:8080/admin/categories </h1>
 </body>
 </html>

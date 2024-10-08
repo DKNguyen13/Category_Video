@@ -20,7 +20,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @MultipartConfig(fileSizeThreshold= 1024 * 1024, maxFileSize= 1024 * 1024*5, maxRequestSize = 1024 * 1024*5*5)
-@WebServlet(urlPatterns = {"/admin/videos","/admin/video/add","/admin/video/edit","/admin/video/insert"})
+@WebServlet(urlPatterns = {"/admin/videos","/admin/video/add","/admin/video/edit","/admin/video/insert",
+        "/admin/video/delete", "/admin/video/update"})
 public class VideoController extends HttpServlet {
     IVideoService videoService = new VideoService();
     String categoryid ="";
@@ -46,8 +47,22 @@ public class VideoController extends HttpServlet {
         }
         else if(url.contains("edit")) {
             String videoid = req.getParameter("id");
-            req.setAttribute("vId",videoid);
+            req.setAttribute("catid",categoryid);
+            Category cate = cateS.FindById(Integer.parseInt(categoryid));
+            req.setAttribute("category", cate);
+            Video vid = videoService.FindById(videoid);
+            req.setAttribute("vId",vid);
             req.getRequestDispatcher("/views/admin/video_edit.jsp").forward(req, resp);
+        }
+        else if (url.contains("delete")){
+            String id = req.getParameter("id");
+            Video video = videoService.FindById(id);
+            try {
+                videoService.Delete(video);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            resp.sendRedirect(req.getContextPath() + "/admin/videos?id=" + categoryid);
         }
     }
 
@@ -106,7 +121,51 @@ public class VideoController extends HttpServlet {
             }
 
             videoService.Insert(video);
-            resp.sendRedirect(req.getContextPath() + "/admin/categories");
+            resp.sendRedirect(req.getContextPath() + "/admin/videos?id=" + categoryid);
+        }
+        else if(url.contains("update")){
+            String id = req.getParameter("cateID");
+            Category cate = cateS.FindById(Integer.parseInt(id));
+            String videoID = req.getParameter("videoid");
+            int active = Integer.parseInt(req.getParameter("active"));
+            int views = Integer.parseInt(req.getParameter("views"));
+
+            Video vi = new Video();
+            vi.setCategory(cate);
+            vi.setVideoId(videoID);
+            vi.setDescription(req.getParameter("description"));
+            vi.setTitle(req.getParameter("title"));
+            vi.setViews(views);
+            vi.setActive(active);
+
+            String fname = "";
+            String uploadPath = Constant.DIR;
+            File uploadDir = new File(uploadPath);
+            if(!uploadDir.exists()){
+                uploadDir.mkdir();
+            }
+            try{
+                Part part = req.getPart("images");
+                if (part.getSize() > 0) {
+                    String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                    //Doi ten file
+                    int index = fileName.lastIndexOf(".");
+                    String ext = fileName.substring(index + 1);
+                    fname = System.currentTimeMillis() + "." + ext;
+                    //upload file
+                    part.write(uploadPath + "/" + fname);
+                    //ghi ten file vao data
+                    vi.setPoster(fname);
+                }
+                else{
+                    vi.setPoster("apple-apple-iphone.gif");
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            videoService.Update(vi);
+            resp.sendRedirect(req.getContextPath() + "/admin/videos?id=" + categoryid);
         }
     }
 }

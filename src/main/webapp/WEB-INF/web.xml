@@ -8,9 +8,5 @@
 
   <welcome-file-list>
     <welcome-file>views/admin/home.jsp</welcome-file>
-
   </welcome-file-list>
-
-  <!-- Nếu bạn cần định nghĩa các servlet, filters, hoặc listeners, bạn có thể thêm ở đây -->
-
 </web-app>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
+<title>Edit category</title>
 <form action="${pageContext.request.contextPath}/admin/category/update" method="post" enctype="multipart/form-data" >
     <input type="text" id="categoryId" name="categoryId" value="${cate.categoryId}"  readonly><br>
     <label for="categoryname">Category Name: </label><br>
@@ -13,7 +14,7 @@
     <c:if test="${cate.images.substring(0,5) == 'https'}">
         <c:url value="${cate.images}" var="imgUrl"></c:url>
     </c:if>
-    <img height="150" width="200" src="${imgUrl}" />
+    <img height="150" width="200" src="${imgUrl}" /> <br>
     <input type="file" id="images" name="images" value="${cate.images}"><br>
     <label for="status">Status: </label><br>
     <input type="text" id="status" name="status" value="${cate.status}"><br><br>

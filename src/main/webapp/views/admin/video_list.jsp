@@ -1,11 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<html>
-<head>
-    <title>Video list</title>
-</head>
-<body>
-<a href="${pageContext.request.contextPath}/admin/video/add">Add video</a>
+<a href="${pageContext.request.contextPath}/admin/video/add">Add video</a> <br>
+<a href="${pageContext.request.contextPath}/admin/categories">Category list</a>
 <table border="1" width="100%">
     <tr>
         <th>Video ID</th>
@@ -29,13 +25,11 @@
 
             <td style="text-align: center">${video.views}</td>
             <td style="text-align: center">${video.active == 1 ? 'Active' : 'Inactive'}</td>
-            <td>
-                <a href="<c:url value='/admin/video/edit?id=${video.videoId}'/>"style="text-align: center">Edit</a>
+            <td style="text-align: center">
+                <a href="<c:url value='/admin/video/edit?id=${video.videoId}'/>">Edit</a>
                 |
-                <a href="<c:url value='/admin/video/edit?id=${video.videoId}'/>" style="text-align: center">Delete</a>
+                <a href="<c:url value='/admin/video/delete?id=${video.videoId}'/>" >Delete</a>
             </td>
         </tr>
     </c:forEach>
 </table>
-</body>
-</html>
