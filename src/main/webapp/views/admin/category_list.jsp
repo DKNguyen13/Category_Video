@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<title>Category list</title>
 <a href="${pageContext.request.contextPath}/admin/category/add">Add category</a>
 <table border="1" width="100%">
     <tr>
@@ -12,8 +13,8 @@
     </tr>
     <c:forEach items="${listcate}" var="cate" varStatus="STT" >
         <tr>
-            <td>${STT.index+1 }</td>
-            <td>
+            <td style="text-align: center">${STT.index+1 }</td>
+            <td style="text-align: center">
                 <c:if test="${cate.images.substring(0,5) !='https'}">
                     <c:url value="/image?fname=${cate.images}" var="imgUrl"></c:url>
                 </c:if>
@@ -22,9 +23,9 @@
                 </c:if>
                 <img height="150" width="200" src="${imgUrl}" />
             </td>
-            <td>${cate.categoryId }</td>
-            <td>${cate.categoryname }</td>
-            <td>
+            <td style="text-align: center">${cate.categoryId }</td>
+            <td style="text-align: center">${cate.categoryname }</td>
+            <td style="text-align: center">
                 <c:if test="${cate.status==1 }">
                     <span>Hoạt động</span>
                 </c:if>
@@ -32,8 +33,11 @@
                     <span>Khóa</span>
                 </c:if>
             </td>
-            <td><a href="<c:url value='/admin/category/edit?id=${cate.categoryId }'/>">Sửa</a>
-                | <a href="<c:url value='/admin/category/delete?id=${cate.categoryId }'/>">Xóa</a></td>
+            <td style="text-align: center">
+                <a href="<c:url value='/admin/category/edit?id=${cate.categoryId }'/>">Sửa</a>
+                | <a href="<c:url value='/admin/category/delete?id=${cate.categoryId }'/>">Xóa</a>
+                | <a href="<c:url value='/admin/videos?id=${cate.categoryId }'/>" >Video</a>
+            </td>
         </tr>
     </c:forEach>
 </table>
