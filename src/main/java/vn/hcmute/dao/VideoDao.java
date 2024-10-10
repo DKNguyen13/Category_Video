@@ -96,6 +96,7 @@ public class VideoDao implements IVideoDao {
 
     @Override
     public List<Video> FindListById(String categoryId) {
+        // Do là khóa ngoại tham chiếu nên dùng khóa ngoại này để tìm kiếm danh sách video thuộc category
         EntityManager enma = JPAConfig.getEntityManager();
         TypedQuery<Video> query = enma.createQuery("SELECT v FROM Video v WHERE v.category.categoryId = :categoryId", Video.class);
         query.setParameter("categoryId", Integer.parseInt(categoryId)); // Chuyển đổi categoryId từ String sang int
